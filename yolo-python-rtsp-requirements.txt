@@ -1,3 +1,0 @@
-numpy==1.25.0
-opencv-python==4.5.3.56
-imageio-ffmpeg==0.4.8

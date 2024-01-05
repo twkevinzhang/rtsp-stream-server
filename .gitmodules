@@ -1,3 +1,0 @@
-[submodule "yolo-python-rtsp"]
-	path = yolo-python-rtsp
-	url = https://github.com/foschmitz/yolo-python-rtsp.git

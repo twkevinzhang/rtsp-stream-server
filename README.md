@@ -1,44 +1,24 @@
 # rtsp-stream-server
 A simple RTSP stream server with YOLOv3 (darknet)
 
+提供一個簡單的 RTSP stream server，並且可以在影像上使用預訓練的 [yolov3-tiny.weights] 標註物件位置。
+
+ffmpeg 製作 RTSP stream 給 rtsp-stream-server, 
+rtsp-stream-server 在 localhost:8554/stream 發布 stream, 
+yolo-python-rtsp 接收 stream 從 0 到 100 frame, 並輸出標記物至 output 資料夾。
+
 ## Prerequisites
- - ffmpeg
  - docker
 
-## Clone
+## Start
 ```
-git clone --recurse-submodules https://github.com/neslxzhen/rtsp-stream-server
+make up
 ```
-
-## Installation
-```
-make install
-```
-
-## Usage
-```
-make run
-make stream
-```
+then access rtsp://localhost:8554/stream
 
 ## Stop
-CTRL+C and input
 ```
-make stop
+make down
 ```
 
-## IndexError
-ref: https://github.com/foschmitz/yolo-python-rtsp/issues/7
-```
-Traceback (most recent call last):
-  File "/home/bucketanalytics/kevin-lab/rtsp-stream-server/yolo-python-rtsp/yolo_opencv.py", line 172, in <module>
-    frame = detect(frame)
-  File "/home/bucketanalytics/kevin-lab/rtsp-stream-server/yolo-python-rtsp/yolo_opencv.py", line 87, in detect
-    outs = net.forward(get_output_layers(net))
-  File "/home/bucketanalytics/kevin-lab/rtsp-stream-server/yolo-python-rtsp/yolo_opencv.py", line 50, in get_output_layers
-    output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
-  File "/home/bucketanalytics/kevin-lab/rtsp-stream-server/yolo-python-rtsp/yolo_opencv.py", line 50, in <listcomp>
-    output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
-IndexError: invalid index to scalar variable.
-```
-change `yolo_opencv.py` line 50 to `output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]`
+[yolov3-tiny.weights]: https://pjreddie.com/media/files/yolov3-tiny.weights
